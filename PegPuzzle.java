@@ -25,51 +25,65 @@ public class PegPuzzle{
 	{10,11,12}, {12,11,10},
     	{11,12,13}, {13,12,11},
 	{12,13,14}, {14,13,12}};
-    private int[] board = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
    private int[] soln1 = {1,25,2,5,15,4,29,26,35,32,20,33,30};
+   private int[] soln2 = {5,0,7,17,4,13,8,11,33,17,24,10,23};
+   private int[] soln3 = {11,2,9,19,10,23,6,5,32,19,25,4,13};
+   private int[] soln4 = {0,3,5,9,19,2,11,8,32,35,15,4,13};
+   private int[] soln5 = {17,29,6,5,0,10,33,14,32,23,20,33,30};
 
-    /* solve */
+   private int[][] solns = {soln1,soln2,soln3,soln4,soln5};
+
+
+    //solve peg puzzle
     public void solve(){
         int[] m;
+	int[] soln;
 	int s;
-                System.out.print("\n");
-        for(int i = 0; i < 13; i++){
-	    s = soln1[i];
-            m = moveList[s];
-            if(canMove(m)){
-                move(m);
-	    }
-                System.out.println("    " + board[0]);
-                System.out.println("   " + board[1] + " " + board[2]);
-                System.out.println("  " + board[3] + " " + board[4] + " " + board[5]);
-                System.out.println(" " + board[6] + " " + board[7] + " " + board[8] + " " + board[9]);
-                System.out.println(board[10] + " " + board[11] + " " + board[12] + " " + board[13] + " " + board[14]);
-                System.out.print("\n");
-        }
+	int[] board;
+    	int[][] boards = { {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	{1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1} };
+    	int[] board_restart = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
+        System.out.print("\n");
+    	for(int j = 0; j < 5; j++)
+	{
+		board = boards[j];
+        	System.out.println("\n");
+        	System.out.println("+---Solution Move Set For Starting Position #" + Integer.toString(j)  + "---+");
+
+        	for(int i = 0; i < 13; i++){
+                    s = solns[j][i];
+        	    m = moveList[s];
+        	    if(canMove(m,board)){
+        	        board = move(m,board);
+		    }
+        	        System.out.println("    " + board[0]);
+        	        System.out.println("   " + board[1] + " " + board[2]);
+        	        System.out.println("  " + board[3] + " " + board[4] + " " + board[5]);
+        	        System.out.println(" " + board[6] + " " + board[7] + " " + board[8] + " " + board[9]);
+        	        System.out.println(board[10] + " " + board[11] + " " + board[12] + " " + board[13] + " " + board[14]);
+        	        System.out.print("\n");
+        	}
+	}
     }
 
     //checks for ability to make move
-    public boolean canMove(int[] m){
-        return (board[m[0]] == 1 && board[m[1]] == 1 && board[m[2]] == 0);
+    public boolean canMove(int[] m, int[] b){
+        return (b[m[0]] == 1 && b[m[1]] == 1 && b[m[2]] == 0);
     }
 
     //makes move
-    public void move(int[] m){
-        board[m[0]] = 0;
-        board[m[1]] = 0;
-        board[m[2]] = 1;
+    public int[] move(int[] m, int[] b){
+        b[m[0]] = 0;
+        b[m[1]] = 0;
+        b[m[2]] = 1;
+	return b;
     }
 
     //main
     public static void main(String[] args){
         PegPuzzle p = new PegPuzzle();
-	System.out.println("\n");
-	System.out.println("+---Solution Move Set For Starting Position #0---+");
         p.solve();
-//        int[] b = c.getBarrel();
-//        for(int i = 0; i < 15; i++){
-//            System.out.print(b[i] + " ");
-//        }
     }
 }
