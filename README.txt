@@ -5,6 +5,7 @@ This program solves the Cracker Barrel Peg Puzzle (https://shop.crackerbarrel.co
 Usage:
 
 >javac PegPuzzle.java
+
 >java PegPuzzle
 
 +---Solution Move Set For Starting Position #0---+
